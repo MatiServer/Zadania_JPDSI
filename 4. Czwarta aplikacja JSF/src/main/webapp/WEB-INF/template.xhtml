@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title><ui:insert name="title">#{msg['app.title']}</ui:insert></title>
+    <h:outputStylesheet library="css" name="style.css" />
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{calcBB.updateLocale}"/>
+    </f:metadata>
+</h:head>
+
+<h:body>
+    <div class="container">
+        <div class="form-container">
+            <h2><ui:insert name="header">#{msg['app.title']}</ui:insert></h2>
+        </div>
+        
+        <ui:insert name="content">
+            <p>Domyślna zawartość strony</p>
+        </ui:insert>
+        
+        <div class="form-container">
+            <h:form>
+                <p:commandButton value="Polski" action="#{calcBB.setLocale('pl')}" update="@all" />
+                <p:commandButton value="English" action="#{calcBB.setLocale('en')}" update="@all" />
+            </h:form>
+            <ui:insert name="footer">
+                <footer>&copy; 2024 Mateusz Moric</footer>
+            </ui:insert>
+        </div>
+    </div>
+</h:body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">#{msg['app.result']}</ui:define>
+
+    <ui:define name="content">
+        <p:messages closable="true" styleClass="messages" />
+
+        <h2>#{msg['app.result']}</h2>
+        <p>#{msg['app.yourinterest']}<strong>#{calcBB.miesieczna_rata}</strong></p>
+
+        <h:form>
+            <p:commandButton value="#{msg['app.return']}" action="#{calcBB.goToIndex}" icon="pi pi-arrow-left" styleClass="ui-button-secondary" />
+        </h:form>
+    </ui:define>
+</ui:composition>

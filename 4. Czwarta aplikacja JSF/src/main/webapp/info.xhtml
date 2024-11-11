@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Informacje</ui:define>
+
+    <ui:define name="content">
+        <h1>#{msg['app.info']}</h1>
+        <p>#{msg['app.blank']}</p>
+
+        <h:form>
+            <p:commandButton value="#{msg['app.homepage']}" action="#{calcBB.goToIndex}" icon="pi pi-home" styleClass="ui-button-primary" />
+        </h:form>
+    </ui:define>
+</ui:composition>
