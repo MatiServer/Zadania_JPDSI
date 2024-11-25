@@ -1,0 +1,269 @@
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.jumbotron {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.75)), url("#{resource['images/safety.jpg']}");;
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.jumbotron h1 {
+    font-weight: bold;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.jumbotron p {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+
+.btn-primary {
+    background-color: #111111;
+    border-color: #111111;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 70%;
+}
+
+.btn-primary:hover {
+    background-color: #222222;
+    border-color: #222222;
+}
+
+.card {
+    background-color: #1a1a1a;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.card:hover {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    background-color: #212529;
+    color: #ffffff;
+    font-weight: bold;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.category-button {
+    background-color: #222222;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.category-button:hover {
+    background-color: #218838;
+    color: #ffffff;
+}
+
+/* List Group */
+.list-group-item {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.list-group-item:hover {
+    background-color: #212529;
+    border-color: #212529;
+    color: #ffffff;
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #333 !important;
+    color: white !important;
+}
+
+.dark-mode-title {
+    color: white !important;
+}
+
+.dark-mode-content {
+    color: white !important;
+}
+
+.category {
+    position: relative;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    overflow: hidden;
+    justify-content: center;
+    border: 5px solid black;
+}
+
+.category img {
+    width: calc(100% + 15px);
+    height: calc(400px + 15px);
+    object-fit: cover;
+    align-self: center;
+    filter: blur(5px);
+    transition: filter 0.5s ease, opacity 0.5s ease;
+    margin-left: -5px;
+    margin-top: -5px;
+}
+
+.category:hover img {
+    filter: blur(0);
+}
+.category-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.category h5, .category p {
+    color: white;
+}
+
+.category:hover {
+    filter: blur(0);
+}
+
+.text-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    z-index: 1;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.65);
+    border-radius: 10px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.category:hover .text-layer {
+    opacity: 0;
+}
+
+.menu-bar {
+    background-color: #003366 !important; /* Ensure the background color is applied */
+    color: white !important; /* Force text color */
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.menu-bar .p-toolbar-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-bar .p-toolbar-group p {
+    margin: 0 10px;
+}
+
+.menu-bar .p-toolbar-group p a {
+    color: white !important;
+    text-decoration: none;
+}
+
+.menu-bar .ui-button, .menu-bar .ui-commandlink {
+    color: white !important;
+    border: none;
+    background-color: transparent !important;
+    font-weight: bold;
+}
+
+.menu-bar .ui-button:hover, .menu-bar .ui-commandlink:hover {
+    background-color: #0055cc;
+    color: white !important;
+}
+
+.larger-link {
+    font-size: 10rem;
+    font-weight: bold;
+    color: white !important;
+}
+
+.button-spacing {
+    margin-right: 10px !important;
+}
+
+#language-switcher {
+    position: fixed;
+    bottom: 20px; /* Odstęp od dołu */
+    right: 20px;  /* Odstęp od prawej */
+    z-index: 1000; /* Gwarantuje widoczność nad innymi elementami */
+}
+
+.custom-toolbar {
+    display: flex;                  /* Użycie flexboxa dla poprawnego rozmieszczenia */
+    justify-content: space-between; /* Rozmieszczenie elementów: logo po lewej, przyciski po prawej */
+    align-items: center;            /* Wyrównanie elementów w pionie */
+    height: 80px;                   /* Stała wysokość paska */
+    background-color: #003366 !important;      /* Tło paska (ciemnoniebieskie) */
+    color: white;                   /* Kolor tekstu */
+    padding: 0 15px;                /* Dodatkowe miejsce po bokach */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.custom-toolbar h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.custom-toolbar .ui-button, 
+.custom-toolbar .ui-commandlink {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: transparent;
+    border: none;
+    color: white !important;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.custom-toolbar .ui-button:hover,
+.custom-toolbar .ui-commandlink:hover {
+    background-color: #0055cc;
+    color: white !important;
+    border-radius: 5px;
+}
