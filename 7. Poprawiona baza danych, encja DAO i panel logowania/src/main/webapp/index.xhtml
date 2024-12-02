@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+    <title>#{msg['app.title']}</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="#{LanguageBean.locale eq 'pl' ? 'styles_pl.css' : 'styles_en.css'}" />
+    <h:outputStylesheet library="css" name="sweetalert2.min.css" />
+    <h:outputScript library="js" name="sweetalert2.all.min.js" />
+    
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{LanguageBean.updateLocale}"/>
+    </f:metadata>
+    <style>
+    .swal-dark-popup {
+        background-color: #333 !important;
+        color: white !important;
+    }
+    .swal-dark-title {
+        color: white !important;
+    }
+    .swal-dark-content {
+        color: white !important;
+    }
+    .swal-dark-btn {
+        background-color: #555 !important;
+        color: white !important;
+        border: none !important;
+    }
+    .swal-dark-btn:hover {
+        background-color: #444 !important;
+    }
+</style>
+    
+    <h:outputScript>
+        function saveScrollPosition() {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        }
+    </h:outputScript>
+</h:head>
+
+<h:body>
+    <h:form>
+        <script>
+            var loginMessage = '#{flash.loginMessage}';
+            if (loginMessage) {
+                Swal.fire({
+                    title: 'Sukces!',
+                    text: loginMessage,
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal-dark-popup',
+                        title: 'swal-dark-title',
+                        content: 'swal-dark-content',
+                        confirmButton: 'swal-dark-btn'
+                    }
+                });
+            }
+        </script>
+        <p:messages id="messages" globalOnly="true"/>
+        <p:toolbar styleClass="custom-toolbar">
+            <p:toolbarGroup>
+                <h2>#{msg['app.header']}</h2>
+            </p:toolbarGroup>
+
+            <p:toolbarGroup align="right">
+                <p:commandButton value="#{msg['toolbar.login']}" ajax="false" action="login.xhtml" rendered="#{not userBean.loggedIn}" styleClass="ui-button button-spacing" />
+                <p:commandButton value="#{msg['toolbar.register']}" action="register.xhtml" rendered="#{not userBean.loggedIn}" styleClass="ui-button button-spacing" />
+                <p:growl id="growl" showDetail="true" life="3000" />
+                <p:commandButton value="Wywołaj komunikat" 
+                     action="#{applicationBean.init}" 
+                     update="growl"
+                     oncomplete="showSweetAlert()"
+                     process="@this" />
+
+                
+                <ui:fragment rendered="#{userBean.loggedIn}">
+                    <p:commandLink value="Events" action="event_list.xhtml" styleClass="ui-commandlink button-spacing" />
+                    <p:commandLink value="Logout" action="#{userBean.logout}" styleClass="ui-commandlink button-spacing" />
+                    <p:commandLink value="Moderator Panel" action="moderator_panel.xhtml" rendered="#{userBean.role eq 'moderator'}" styleClass="ui-commandlink button-spacing" />
+                </ui:fragment>
+            </p:toolbarGroup>
+        </p:toolbar>
+        
+        <div id="language-switcher">
+            <p:menuButton icon="pi pi-globe">
+                <p:menuitem value="Polski" actionListener="#{LanguageBean.setLocale('pl')}" onclick="saveScrollPosition()"/>
+                <p:menuitem value="English" actionListener="#{LanguageBean.setLocale('en')}" onclick="saveScrollPosition()"/>
+            </p:menuButton>
+        </div>
+    </h:form>
+
+    <div class="jumbotron d-flex flex-column justify-content-center align-items-center">
+        <div class="container text-center">
+            <h1>#{msg['jumbo.txth1']}</h1>
+            <p></p>
+            <p>#{msg['jumbo.txtp2']}</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2 class="text-center mb-4">#{msg['events.txtmb4']}</h2>
+        <div class="row">
+
+            <div class="col-12">
+                <div class="category" style="background-image: url('resources/images/training.jpg');">
+                    <img src="resources/images/training.jpg" alt="Training" />
+                    <div class="text-layer">
+                        <h3>#{msg['events.h31']}</h3>
+                        <p>#{msg['events.p1']}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="category" style="background-image: url('resources/images/conference2.jpg');">
+                    <img src="resources/images/conference2.jpg" alt="Conferences" />
+                    <div class="text-layer">
+                        <h3>#{msg['events.h32']}</h3>
+                        <p>#{msg['events.p2']}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="category" style="background-image: url('resources/images/docs.jpg');">
+                    <img src="resources/images/docs.jpg" alt="Lectures" />
+                    <div class="text-layer">
+                        <h3>#{msg['events.h33']}</h3>
+                        <p>#{msg['events.p3']}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <h:outputScript>
+        window.onload = function() {
+            var scrollPosition = sessionStorage.getItem('scrollPosition');
+            if (scrollPosition) {
+                document.documentElement.style.scrollBehavior = 'auto';
+                window.scrollTo(0, scrollPosition);
+                sessionStorage.removeItem('scrollPosition');
+            }
+        }
+    </h:outputScript>
+     <script>
+        function showSweetAlert() {
+            var sweetMessage = '#{applicationBean.sweetMessage}';
+            if (sweetMessage) {
+                Swal.fire({
+                    title: 'Komunikat',
+                    text: sweetMessage,
+                    icon: 'info',
+                    confirmButtonText: 'OK'
+                });
+            }
+        }
+    </script>
+
+</h:body>
+</html>
