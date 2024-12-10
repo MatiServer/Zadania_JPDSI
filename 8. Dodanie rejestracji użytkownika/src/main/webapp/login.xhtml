@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+    <title>#{msg['login.title']}</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="#{LanguageBean.locale eq 'pl' ? 'styles_pl.css' : 'styles_en.css'}"/>
+    <h:outputStylesheet library="css" name="custom-styles.css" />
+    <h:outputScript name="https://cdn.jsdelivr.net/npm/sweetalert2@11"/>
+    <h:outputScript name="https://code.jquery.com/jquery-3.6.0.min.js"/>
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{LanguageBean.updateLocale}"/>
+    </f:metadata>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            padding: 2rem;
+            border-radius: 8px;
+            background: #1e1e1e;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .card-header {
+            background: #007bff;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .card-footer {
+            padding: 15px;
+            background: #2e2e2e;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            color: #ccc;
+        }
+
+        .modern-input {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .modern-input input,
+        .modern-input input:focus,
+        .modern-input input:hover {
+            background: #1e1e1e;
+            border: none;
+            border-bottom: 2px solid #555;
+            width: 100%;
+            padding: 10px 5px;
+            font-size: 16px;
+            color: #e0e0e0;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .modern-input input:focus {
+            border-bottom: 2px solid #007bff;
+            box-shadow: none;
+        }
+
+        .modern-input label {
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            font-size: 14px;
+            color: #aaa;
+            pointer-events: none;
+            transition: all 0.3s;
+        }
+
+        .modern-input input:focus ~ label,
+        .modern-input input:not(:placeholder-shown) ~ label {
+            top: -10px;
+            font-size: 12px;
+            color: #007bff;
+        }
+
+        .ui-button {
+            background: #007bff;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .ui-button:hover {
+            background: #0056b3;
+        }
+
+        .button-spacing {
+            margin-left: 10px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <h:form>
+        <p:toolbar styleClass="custom-toolbar">
+            <p:toolbarGroup>
+                <h2>#{msg['login.header']}</h2>
+            </p:toolbarGroup>
+
+            <p:toolbarGroup align="right">
+                <p:commandButton value="#{msg['toolbar.register']}" action="register.xhtml" styleClass="ui-button button-spacing" />
+                <p:commandButton value="#{msg['toolbar.back']}" ajax="false" action="index.xhtml" styleClass="ui-button button-spacing" />
+            </p:toolbarGroup>
+        </p:toolbar>
+
+        <div id="language-switcher">
+            <p:menuButton icon="pi pi-globe">
+                <p:menuitem value="Polski" actionListener="#{LanguageBean.setLocale('pl')}" />
+                <p:menuitem value="English" actionListener="#{LanguageBean.setLocale('en')}" />
+            </p:menuButton>
+        </div>
+
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-container">
+                        <div class="card-header text-center">
+                            <h3>#{msg['login.title']}</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="modern-input">
+                                <p:inputText id="username" value="#{loginBean.username}" required="true"
+                                             placeholder=" "
+                                             requiredMessage="#{msg['login.username.required']}" />
+                                <label for="username">#{msg['login.username']}</label>
+                            </div>
+
+                            <div class="modern-input">
+                                <p:password id="password" value="#{loginBean.password}" feedback="false" placeholder=" "
+                                            required="true" requiredMessage="#{msg['login.password.required']}" />
+                                <label for="password">#{msg['login.password']}</label>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <p:growl id="growl" showDetail="true" life="3000" />
+                                <p:commandButton value="Log in" action="#{loginBean.login}" ajax="false" styleClass="ui-button" />
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <p:link value="#{msg['login.forgotPassword']}" outcome="forgot_password.xhtml" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+</html>
